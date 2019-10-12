@@ -21,11 +21,23 @@ using namespace std;
 #define MIN(a, b) (a > b ? b : a)
 
 int getMinJump(int arr[], int n) {
-// add your code here
+	int steps[n];
+	for(int i =0 ; i <n;i++){
+		steps[i] = 20000000;
+	}
+	for(int i = 0; i <n;i++){
+		if(i == 0){
+			steps[i] = 0;
+		}
+		for(int k = i; k <= n && k <= i+arr[i]; k++){
+			steps[k] = MIN(steps[k],steps[i]+1);
+		}
+	}
+	return steps[n-1];
 }
 
 int main() {
-  int arr[] = {1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9};
+  int arr[] = {1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9,1,1,1,1,1,1,2,3,4,1};
   int n = sizeof(arr) / sizeof(int);
   cout << "getMinJump returns " << getMinJump(arr, n) << endl;
 

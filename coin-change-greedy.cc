@@ -20,8 +20,15 @@
 using namespace std;
 
 int miniCoins(int S, int coins[], int n) {
-  // assume coins are sorted from minimum to maximum
-  // add your code here.
+	int numCoins = 0;
+	for(int i = n-1; i >=0; i--){
+		while(coins[i] <= S){ 
+			numCoins++;
+			S-=coins[i];
+		}
+	}
+	return numCoins;
+
 }
 
 int main() {

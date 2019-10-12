@@ -30,10 +30,33 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <cmath>
 using namespace std;
 
 int GetMinimumStep(int n, int memo[]) {
-// add your code here
+	for(int i = 0; i < n+1; i++){
+		if(i == 1){
+			memo[i] = 0;
+		}
+		if(i == 0){
+			memo[i] = -1;
+		}
+		else{
+			int curMin = memo[i-1]+1;
+			//cout << "I: "<<i<<", "<<curMin <<" ";
+			if(i%2 ==0){
+				curMin = min(curMin,memo[i/2]+1);
+				//cout << curMin <<" " << memo[i/2]+1<<" ";
+			}
+			if(i%3==0){
+				curMin = min(curMin,memo[i/3]+1);
+				//cout << curMin << " " << memo[i/3]+1<<" ";
+			}
+			//cout << curMin<<endl;
+			memo[i] = curMin;
+		}
+	}
+	return memo[n];
 }
 
 int main() {

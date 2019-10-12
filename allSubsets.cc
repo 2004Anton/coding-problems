@@ -5,12 +5,47 @@
 #include <iostream>
 #include <math.h>
 #include <vector>
+#include <queue>
 
 //master test...
 using namespace std;
 
+struct charInt{
+	int i;
+	vector<int> vals;
+};
+
 void printoutSubSets(vector<int> v) {
-// add your coce here.
+	queue<charInt> s;
+	for(vector<int>::iterator it = v.begin(); it < v.end(); ++it){
+		charInt ci;
+		ci.i = it-v.begin();
+		vector<int> tmp;
+		tmp.push_back(*it);
+		ci.vals = tmp;
+		s.push(ci);
+	}
+	while(!(s.empty())){
+		charInt top = s.front();
+		s.pop();
+		vector<int> vi = top.vals;
+		cout << "(";
+		for(vector<int>::iterator it = vi.begin(); it < vi.end(); ++it){
+			cout << *it;
+			if(it != vi.end()-1){
+				cout << ",";
+			}
+		}
+		cout << ") ";
+		for(vector<int>::iterator it = v.begin()+top.i+1; it < v.end();++it){
+			charInt newCi;
+			newCi.i = it-v.begin();
+			newCi.vals = top.vals;
+			newCi.vals.push_back(*it);
+			s.push(newCi);
+		}		
+	}
+
 }
 
 int main() {

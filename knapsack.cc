@@ -18,14 +18,33 @@ using namespace std;
 
 // Dynamic programming: be aware of K[i][*] is working on wt[i-1] and price[i-1]
 int knapsack_dp(int W, int wt[], int price[], int n) {
-// add your code here
+	int k[n+1][W+1];
+	for(int i = 0; i <= n; i++){
+		cout << wt[i-1]<<" "<<i-1 <<endl;
+		for(int w = 0; w <= W; w++){
+			if(i == 0 && w==0){
+				k[i][w] = 0;
+			}
+			if(w >=((i>0)? wt[i-1]:100000000)){
+
+				//cout << ((i > 0) ? k[i-1][w] : 0)+ price[i-1];
+				k[i][w] = MAX(((i > 0) ? k[i-1][w-wt[i-1]] : 0 )+ price[i-1],((i >0) ? k[i-1][w] : 0));
+			}
+			else{
+				k[i][w] = (i > 0)?k[i-1][w] : 0;
+			}
+			cout << k[i][w] <<" ";
+		}
+		cout << endl;
+	}
+	return k[n][W];
 }
 
 int main() {
   int W = 50;
-  int wt[] = {10, 20, 30};
-  int price[] = {60, 100, 120};
-  int n = 3;
+  int wt[] = {10, 20, 30,20};
+  int price[] = {60, 100,120,1000};
+  int n = 4;
 
   cout << "knapsack DP returns " << knapsack_dp(W, wt, price, n) << endl;
   return 0;

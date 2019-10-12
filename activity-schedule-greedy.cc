@@ -25,17 +25,33 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <cmath>
 using namespace std;
 
 // this is a test
 
 int getMaxSchedule(int start[], int finish[], int n, int limit) {
-// add your code here...
+	if(n <= 0){
+		return 0;
+	}
+	if(n == 1){
+		return 1;
+	}
+	int ans = 1;
+	int lastF = finish[0];
+	int tempN = 0;
+	for(int i = 1; i < n; i++){
+		if(lastF <= start[i]){
+			lastF = finish[i];
+			ans++;
+		}
+	}
+	return min(limit,ans);
 }
 
 int main() {
-  int start[] = {1, 3, 0, 5, 8, 5};
-  int finish[] = {2, 4, 6, 7, 9, 9};
+  int start[]  =  {1, 3, 0, 5, 8, 5};
+  int finish[] =  {2, 4, 6, 7, 9, 9};
   int n = sizeof(start) / sizeof(int);
   cout << "getMaxSchedule returns " << getMaxSchedule(start, finish, n, n)
        << endl;
