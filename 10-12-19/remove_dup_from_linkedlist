@@ -1,0 +1,49 @@
+// cracking the coding interview
+// question 2.1: remove dup
+// write code to remove duplicates from an unsorted linked list
+#include <iostream>
+#include <unordered_set>
+
+using namespace std;
+
+struct Node {
+  int data;
+  Node *next;
+};
+
+Node *head = nullptr;
+
+void insertNode(int d) {
+  Node *p = new Node;
+  p->data = d;
+  p->next = head;
+  head = p;
+}
+void removeDup(Node *n) {
+
+}
+
+void dumpNode() {
+  Node *p = head;
+  while (p) {
+    cout << p->data << " ";
+    p = p->next;
+  }
+  cout << endl;
+}
+
+int main() {
+  insertNode(1);
+  insertNode(10);
+  insertNode(11);
+  insertNode(21);
+  insertNode(1);
+  insertNode(1);
+  dumpNode();
+
+  removeDup(head);
+
+  dumpNode();
+
+  return 0;
+}
